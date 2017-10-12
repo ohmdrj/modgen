@@ -1,0 +1,35 @@
+#if (!$pkg.empty)
+package $pkg;
+#end
+
+#foreach ($i in $impos)
+import $i;
+#end
+
+@Entity
+public class $synth extends $base {
+
+## Fields
+#foreach ($p in $props)
+#foreach ($a in $p.anots)
+    $a
+#end
+    private ${p.type} $p;
+#end
+
+## Gettry
+#foreach ($p in $props)
+
+    /** get $p */
+    @Override
+    ${p.access}${p.type} get${p.etter}() {
+        return this.$p;
+    }
+
+    /** $p */
+    ${p.access}void set${p.etter}(${p.type} $p) {
+        this.$p = $p;
+    }
+#end
+
+}
